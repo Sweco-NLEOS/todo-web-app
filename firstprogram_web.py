@@ -11,9 +11,14 @@ def add_todo():
 def delete_todo():
     print(todo)
 
+st.set_page_config(layout="wide")
+
 st.title("My todo app")
 st.subheader("we gaan todos bijhouden")
-st.write("Dit is de lijst")
+st.write("Dit is de <b>lijst</b>:", unsafe_allow_html=True)
+
+st.text_input(label="", placeholder="geef hier je todo",
+              on_change=add_todo, key='new_todo')
 
 for index, todo in enumerate(todos):
     checkbox = st.checkbox(todo, key=todo)
@@ -23,9 +28,3 @@ for index, todo in enumerate(todos):
         del st.session_state[todo]
         st.experimental_rerun()
 
-
-st.text_input(label="", placeholder="geef hier je todo",
-              on_change=add_todo, key='new_todo')
-
-
-st.session_state
